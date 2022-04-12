@@ -1,5 +1,5 @@
 import React from "react";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import {DragDropContext, DropResult} from "react-beautiful-dnd";
 import {Todo} from "../../model";
 import './index.css';
 import TodosColumn from "../TodosColumn";
@@ -11,14 +11,14 @@ interface Props {
     setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-const Todos: React.FC<Props> = ({ todos, setTodos, completedTodos, setCompletedTodos }: Props) => {
+const Todos: React.FC<Props> = ({todos, setTodos, completedTodos, setCompletedTodos}: Props) => {
     const onDragEnd = (result: DropResult) => {
-        const { destination, source } = result;
+        const {destination, source} = result;
 
         if (
             !destination ||
             (destination.droppableId === source.droppableId &&
-            destination.index === source.index)
+                destination.index === source.index)
         ) {
             return;
         }
@@ -48,14 +48,13 @@ const Todos: React.FC<Props> = ({ todos, setTodos, completedTodos, setCompletedT
     };
 
     const handleDone = (actualTodo: Todo) => {
-        if (actualTodo.isDone){
+        if (actualTodo.isDone) {
             // if todo is completed should remove from completed and add to todos
             let active = todos
             setCompletedTodos(completedTodos.filter(todo => todo.id !== actualTodo.id))
             active.push({...actualTodo, isDone: false})
             setTodos(active)
-        }
-        else {
+        } else {
             // if todo is active should remove from todos and added to completed todos
             let completed = completedTodos
             setTodos(todos.filter(todo => todo.id !== actualTodo.id))
@@ -65,7 +64,7 @@ const Todos: React.FC<Props> = ({ todos, setTodos, completedTodos, setCompletedT
     };
 
     return (
-        <DragDropContext onDragEnd={onDragEnd} >
+        <DragDropContext onDragEnd={onDragEnd}>
             <div className="todos">
                 <TodosColumn
                     todos={todos}

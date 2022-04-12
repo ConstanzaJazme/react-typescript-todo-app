@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Todo} from "../../model";
 import './index.css';
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { MdDone } from "react-icons/md";
+import {AiFillDelete, AiFillEdit} from "react-icons/ai";
+import {MdDone} from "react-icons/md";
 import {Draggable} from "react-beautiful-dnd";
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
     handleDone: (todo: Todo) => void;
 }
 
-const SingleTodo = ({ index, todo, todos, setTodos, handleDone }: Props) => {
+const SingleTodo = ({index, todo, todos, setTodos, handleDone}: Props) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [edit, setEdit] = useState<boolean>(false);
@@ -30,12 +30,12 @@ const SingleTodo = ({ index, todo, todos, setTodos, handleDone }: Props) => {
     const handleEdit = (e: React.FormEvent, id: number) => {
         e.preventDefault()
         setTodos(
-            todos.map(todo => (todo.id === id ? { ...todo, todo: editTodo } : todo))
+            todos.map(todo => (todo.id === id ? {...todo, todo: editTodo} : todo))
         )
         setEdit(false)
     }
 
-    const isTodoDone = todo.isDone?
+    const isTodoDone = todo.isDone ?
         (<s className="single-todo--text">{todo.todo}</s>)
         : (<span className="single-todo--text">{todo.todo}</span>)
 
@@ -53,24 +53,24 @@ const SingleTodo = ({ index, todo, todos, setTodos, handleDone }: Props) => {
                         ref={provided.innerRef}
                     >
                         {
-                            edit? (
+                            edit ? (
                                 <input
                                     ref={inputRef}
                                     value={editTodo}
-                                    onChange={(e) => setEditTodo(e.target.value) }
+                                    onChange={(e) => setEditTodo(e.target.value)}
                                     className="single-todo--text"
                                 />
-                            ): isTodoDone
+                            ) : isTodoDone
                         }
                         <div>
                         <span className="single-todo--icon" onClick={(e) => isTodoEditable && setEdit(!edit)}>
-                            <AiFillEdit />
+                            <AiFillEdit/>
                         </span>
                             <span className="single-todo--icon" onClick={() => handleDelete(todo.id)}>
-                            <AiFillDelete />
+                            <AiFillDelete/>
                         </span>
                             <span className="single-todo--icon" onClick={() => !edit && handleDone(todo)}>
-                            <MdDone />
+                            <MdDone/>
                         </span>
                         </div>
                     </form>

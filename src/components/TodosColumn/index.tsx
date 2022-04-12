@@ -13,13 +13,13 @@ interface Props {
     handleDone: (todo: Todo) => void;
 }
 
-const TodosColumn: React.FC<Props> = ({ todos, setTodos, type, title, droppableId, handleDone }: Props) => {
+const TodosColumn: React.FC<Props> = ({todos, setTodos, type, title, droppableId, handleDone}: Props) => {
     return (
-        <Droppable droppableId={droppableId} >
+        <Droppable droppableId={droppableId}>
             {
                 (provided, snapshot) => (
                     <div
-                        className={`todos-column${type === "completed" ? " todos-column--completed": ""} todos-column${snapshot.isDraggingOver ? `--drag-${type}`: ""}`}
+                        className={`todos-column${type === "completed" ? " todos-column--completed" : ""} todos-column${snapshot.isDraggingOver ? `--drag-${type}` : ""}`}
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
