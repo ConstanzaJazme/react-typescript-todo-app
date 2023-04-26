@@ -1,17 +1,18 @@
-import React from "react";
+import React, {useContext} from "react";
 import {DragDropContext, DropResult} from "react-beautiful-dnd";
 import {Todo} from "../../model";
 import './index.css';
 import TodosColumn from "../TodosColumn";
+import {TodosContext} from "../../context";
 
 interface Props {
-    todos: Todo[];
-    setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
     completedTodos: Todo[];
     setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-const Todos: React.FC<Props> = ({todos, setTodos, completedTodos, setCompletedTodos}: Props) => {
+const Todos: React.FC<Props> = ({ completedTodos, setCompletedTodos}: Props) => {
+    const { todos, setTodos } = useContext(TodosContext)
+
     const onDragEnd = (result: DropResult) => {
         const {destination, source} = result;
 
